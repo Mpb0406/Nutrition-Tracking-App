@@ -1,0 +1,118 @@
+@import "./custom.scss";
+@import "~bootstrap/scss/bootstrap";
+
+
+
+body {
+  background-color: #0F091B;
+}
+
+// Utilities
+.fs-7 {
+  font-size: 14px;
+}
+
+.quantity-input {
+  width: 50px;
+}
+
+// Dashboard Styles
+.carousel {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin: 3rem auto;
+}
+
+.date-toggle {
+  width: 1.5rem;
+  cursor: pointer;
+}
+
+.box {
+  position: relative;
+  width: 80%;
+  display: flex;
+  margin: 1rem auto;
+
+  justify-content: space-between;
+  align-items: center;
+
+  .text {
+    padding: 10px 0 0;
+    color: #999;
+  }
+}
+
+.percent {
+  position: relative;
+  width: 150px;
+  height: 150px;
+
+  svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+
+    circle {
+      width: 150px;
+      height: 150px;
+      fill: none;
+      stroke-width: 10;
+      stroke: #000;
+      transform: translate(5px, 5px);
+      stroke-dasharray: 440;
+      stroke-dashoffset: 440;
+      stroke-linecap: round;
+    }
+  }
+
+  .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+
+    p {
+      margin-bottom: 3px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+  }
+}
+
+.box .percent svg circle:nth-child(1) {
+  stroke-dashoffset: 0;
+  stroke: #c4c4c4;
+}
+
+.box .percent svg circle:nth-child(2) {
+  stroke: #D03057;
+}
+
+.tabs-container {
+  width: 80%;
+  margin: 3rem auto;
+
+  .nav-link {
+    color: #c4c4c4;
+    padding: 8px 24px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+}
+
+.food-table {
+  width: 80%;
+  margin: auto;
+}
