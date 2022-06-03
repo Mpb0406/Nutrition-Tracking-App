@@ -9,9 +9,18 @@ import {
 } from "react-bootstrap";
 import { API_KEY } from "../config";
 import axios from "axios";
+import DetailsModal from "../Components/DetailsModal";
 
 const FoodSearch = () => {
   const [food, setFood] = useState("");
+  const [results, setResults] = useState(null);
+  const [show, setShow] = useState(false);
+  const [details, setDetails] = useState({});
+
+  const handleOpen = (e) => {
+    setDetails(e.target.id);
+    setShow(true);
+  };
 
   const onChange = (e) => {
     setFood(e.target.value);
@@ -22,8 +31,7 @@ const FoodSearch = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.get(API_URL);
-
-    console.log(response.data);
+    setResults(response.data);
   };
 
   return (
@@ -41,27 +49,41 @@ const FoodSearch = () => {
         <h3 className="text-light fs-6">Results</h3>
         <Table className="mt-3" striped bordered hover variant="dark">
           <tbody>
-            <tr>
-              <td colSpan={8} className="border-end-0">
-                <div className="d-flex align-items-center my-2">
-                  <Form.Check className="mx-3" />
-                  <p className="ms-2 my-0 fw-bold">Chicken</p>
-                </div>
-              </td>
-              <td colSpan={4} className="border-start-0">
-                <div className="d-flex align-items-center justify-content-end">
-                  <label className="fs-7 mx-3">Qty: </label>
-                  <FormControl className="quantity-input" />
-                  <label className="fs-7 mx-3">of</label>
-                  <Form.Select className="w-25">
-                    <option value=""></option>
-                  </Form.Select>
-                  <button className="border-0 bg-transparent text-secondary fs-7 mx-4">
-                    Details
-                  </button>
-                </div>
-              </td>
-            </tr>
+            {results ? (
+              results.hints.map((hint) => (
+                <tr>
+                  <td colSpan={1} className="border-end-0">
+                    <div className="d-flex align-items-center my-2">
+                      <Form.Check className="mx-3" />
+                      <p className="ms-2 my-0 fw-bold">{hint.food.label}</p>
+                    </div>
+                  </td>
+                  <td className="border-start-0">
+                    <div className="d-flex align-items-center justify-content-end">
+                      <label className="fs-7 mx-3">Qty: </label>
+                      <FormControl className="quantity-input" />
+                      <label className="fs-7 mx-3">of</label>
+                      <Form.Select className="w-25">
+                        <option value=""></option>
+                      </Form.Select>
+                      <button
+                        id={hint.food.label}
+                        onClick={handleOpen}
+                        className="border-0 bg-transparent text-secondary fs-7 mx-4">
+                        Details
+                      </button>
+                    </div>
+                  </td>
+                  <DetailsModal
+                    show={show}
+                    setShow={setShow}
+                    details={details}
+                  />
+                </tr>
+              ))
+            ) : (
+              <h1>No Results</h1>
+            )}
           </tbody>
           <tfoot className="border-top-0">
             <tr className="border-0">
