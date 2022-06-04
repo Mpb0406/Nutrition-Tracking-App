@@ -16,9 +16,11 @@ const FoodSearch = () => {
   const [results, setResults] = useState(null);
   const [show, setShow] = useState(false);
   const [details, setDetails] = useState({});
+  const [foodId, setFoodId] = useState("");
 
   const handleOpen = (e) => {
     setDetails(e.target.id);
+    setFoodId(e.target.getAttribute("food"));
     setShow(true);
   };
 
@@ -33,6 +35,12 @@ const FoodSearch = () => {
     const response = await axios.get(API_URL);
     setResults(response.data);
   };
+
+  if (results) {
+    localStorage.setItem("searchResults", JSON.stringify(results.hints));
+  }
+
+  console.log(results);
 
   return (
     <div>
@@ -68,6 +76,7 @@ const FoodSearch = () => {
                       </Form.Select>
                       <button
                         id={hint.food.label}
+                        food={hint.food.foodId}
                         onClick={handleOpen}
                         className="border-0 bg-transparent text-secondary fs-7 mx-4">
                         Details
@@ -78,6 +87,7 @@ const FoodSearch = () => {
                     show={show}
                     setShow={setShow}
                     details={details}
+                    id={foodId}
                   />
                 </tr>
               ))
