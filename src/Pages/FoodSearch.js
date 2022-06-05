@@ -40,8 +40,6 @@ const FoodSearch = () => {
     localStorage.setItem("searchResults", JSON.stringify(results.hints));
   }
 
-  console.log(results);
-
   return (
     <div>
       <h1 className="text-light">Add Food</h1>
