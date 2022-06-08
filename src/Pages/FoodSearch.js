@@ -17,12 +17,21 @@ const FoodSearch = () => {
   const [show, setShow] = useState(false);
   const [details, setDetails] = useState({});
   const [foodId, setFoodId] = useState("");
+  const [foodItem, setFoodItem] = useState("");
+
+  const storedData = JSON.parse(localStorage.getItem("searchResults"));
 
   const handleOpen = (e) => {
     setDetails(e.target.id);
     setFoodId(e.target.getAttribute("food"));
     setShow(true);
+    setFoodItem(
+      storedData.filter(
+        (item) => item.food.foodId == e.target.getAttribute("food")
+      )[0]
+    );
   };
+  console.log(foodItem);
 
   const onChange = (e) => {
     setFood(e.target.value);
@@ -86,6 +95,7 @@ const FoodSearch = () => {
                     setShow={setShow}
                     details={details}
                     id={foodId}
+                    foodItem={foodItem}
                   />
                 </tr>
               ))
