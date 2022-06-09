@@ -31,7 +31,7 @@ const FoodSearch = () => {
       )[0]
     );
   };
-  console.log(foodItem);
+  //   console.log(foodItem);
 
   const onChange = (e) => {
     setFood(e.target.value);

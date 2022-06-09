@@ -44,7 +44,7 @@ const Dashboard = () => {
               cy="70"
               r="70"
               style={{
-                strokeDashoffset: `calc(440 - (440 * 87) / 100)`,
+                strokeDashoffset: `calc(440 - (440 * 60) / 100)`,
                 transition: "all 1.5s ease",
               }}></circle>
           </svg>
@@ -61,7 +61,7 @@ const Dashboard = () => {
               cy="70"
               r="70"
               style={{
-                strokeDashoffset: `calc(440 - (440 * 87) / 100)`,
+                strokeDashoffset: `calc(440 - (440 * 52) / 100)`,
                 transition: "all 1.5s ease",
               }}></circle>
           </svg>
@@ -78,7 +78,7 @@ const Dashboard = () => {
               cy="70"
               r="70"
               style={{
-                strokeDashoffset: `calc(440 - (440 * 87) / 100)`,
+                strokeDashoffset: `calc(440 - (440 * 55) / 100)`,
                 transition: "all 1.5s ease",
               }}></circle>
           </svg>
@@ -95,7 +95,7 @@ const Dashboard = () => {
               cy="70"
               r="70"
               style={{
-                strokeDashoffset: `calc(440 - (440 * 87) / 100)`,
+                strokeDashoffset: `calc(440 - (440 * 5) / 100)`,
                 transition: "all 1.5s ease",
               }}></circle>
           </svg>
