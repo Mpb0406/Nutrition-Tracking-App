@@ -18,6 +18,7 @@ const FoodSearch = () => {
   const [details, setDetails] = useState({});
   const [foodId, setFoodId] = useState("");
   const [foodItem, setFoodItem] = useState("");
+  const [grams, setGrams] = useState(0);
 
   const storedData = JSON.parse(localStorage.getItem("searchResults"));
 
@@ -30,8 +31,13 @@ const FoodSearch = () => {
         (item) => item.food.foodId == e.target.getAttribute("food")
       )[0]
     );
+    setGrams(
+      storedData.filter(
+        (item) => item.food.foodId == e.target.getAttribute("food")
+      )[0].measures[0].weight
+    );
   };
-  //   console.log(foodItem);
+  console.log(grams);
 
   const onChange = (e) => {
     setFood(e.target.value);
@@ -93,9 +99,9 @@ const FoodSearch = () => {
                   <DetailsModal
                     show={show}
                     setShow={setShow}
-                    details={details}
-                    id={foodId}
                     foodItem={foodItem}
+                    grams={grams}
+                    setGrams={setGrams}
                   />
                 </tr>
               ))

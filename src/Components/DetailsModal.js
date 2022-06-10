@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Form, Col } from "react-bootstrap";
 
-const DetailsModal = ({ show, setShow, details, id, foodItem }) => {
+const DetailsModal = ({ show, setShow, foodItem, grams, setGrams }) => {
   const [quantity, setQuantity] = useState({
     amount: 1,
     unit: "",
   });
   const { amount, unit } = quantity;
-
-  const [grams, setGrams] = useState(0);
 
   const handleClose = () => setShow(false);
   const handleQuantity = (e) => {
@@ -19,15 +17,12 @@ const DetailsModal = ({ show, setShow, details, id, foodItem }) => {
   };
 
   //   const parsedFoodData = JSON.parse(localStorage.getItem("searchResults"));
-  let idx =
-    foodItem && foodItem.measures.filter((item) => item.label == unit)[0];
 
   useEffect(() => {
-    idx = foodItem
-      ? foodItem.measures.filter((item) => item.label == unit)[0]
-      : 0;
-    setGrams(idx ? idx.weight : 0);
-  }, [foodItem, unit]);
+    setGrams(
+      grams && foodItem.measures.filter((item) => item.label == unit)[0].weight
+    );
+  }, [unit]);
 
   console.log(grams);
 
@@ -63,7 +58,8 @@ const DetailsModal = ({ show, setShow, details, id, foodItem }) => {
               <h3 className="fw-bold">Nutrition Facts</h3>
               <div>
                 <p className="mb-1">
-                  <span>Serving Size: </span>1
+                  <span>Serving Size: </span>
+                  {`${amount} ${unit} (${grams} grams)`}
                 </p>
               </div>
               <p className="fw-bold mb-0" style={{ fontSize: "12px" }}>
@@ -73,7 +69,9 @@ const DetailsModal = ({ show, setShow, details, id, foodItem }) => {
               <div className="d-flex justify-content-between">
                 <p className="my-0">
                   <span className="fw-bold">Calories: </span>
-                  {foodItem.food.nutrients.ENERC_KCAL}
+                  {Math.round(
+                    (foodItem.food.nutrients.ENERC_KCAL / 100) * grams * amount
+                  )}
                 </p>
                 <p className="mb-1">
                   Calories From Fat{" "}
